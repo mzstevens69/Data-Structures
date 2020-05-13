@@ -77,9 +77,11 @@ class DoublyLinkedList:
         new_node = ListNode(value) 
         self.length += 1 
         if not self.head and not self.tail:
+        #set both head and tail to new_node
             self.head = new_node
             self.tail = new_node
         else:
+            
             new_node.prev = self.tail
             self.tail.next = new_node
             self.tail = new_node

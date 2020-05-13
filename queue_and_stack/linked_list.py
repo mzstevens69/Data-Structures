@@ -24,7 +24,8 @@ class LinkedList:
         self.head = node
         self.next = None
         self.length = 1 if node is not None else 0
-
+    #no access to the end 
+    # when we want to add to the end, we have to traverse the list
     def __len__(self):
         return self.length
         
@@ -33,18 +34,21 @@ class LinkedList:
         new_node = Node(value)
         self.length += 1
         #is the list empty
-        if not self.head:
+        if not self.head and not self.end:
             self.head = new_node
+            self.end = new_node
         #List is not empty
+
         else:
             #what node do we want to add the new node to
             #the last node in the list
             #traverse to the last node in the list
-            current = self.head
-            while current.get_next() is not None:
-                current = current.get_next()
+            self.end.set_next(new_node)
+            self.end = new_node
+            # while current.get_next() is not None:
+            #     current = current.get_next()
             #the end of the list
-            current.set_next(new_node)
+            # current.set_next(new_node)
     
     def remove_from_end(self):
         self.length -= 1
@@ -64,7 +68,7 @@ class LinkedList:
         return value
     
       
-    def add_to_head(self, value):
+    def add_to_head(self, value): #O(1)
         new_node = Node(value)
         self.length += 1
         if not self.head :
@@ -76,6 +80,7 @@ class LinkedList:
             self.head = new_node
             
     def remove_from_head(self):
+        self.length -= 1
         #list is empty?
         if not self.head:
             return None
@@ -89,13 +94,18 @@ class LinkedList:
             self.head = self.head.get_next()
             return value
     
-    def delete(self, node):
-        self.length -= 1
-    #if this is the only node
-        if self.head is self.end:
-            self.head = None
-            self.end = None
-        else: 
+    # def print_ll_elements(self):
+    #     current = self.head
+        
+    #     while current is not None:
+    #         print(current.value)
+    #         current = current.next_node 
             
-            self.head = node.next
-            node.delete()  
+            
+# ll = LinkedList()
+# ll.add_to_end(3)
+# ll.add_to_end(5)
+# ll.add_to_end(6)
+# ll.add_to_end(11)
+# ll.add_to_end(22)
+# ll.print_ll_elements()
